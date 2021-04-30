@@ -4,7 +4,8 @@ from openpyxl import load_workbook
 from openpyxl import Workbook
 import openpyxl 
 
-#COLORES                                                                                                                   GL = "\033[96;1m" # Blue aqua
+#COLORES                                                                                                                   
+GL = "\033[96;1m" # Blue aqua
 GL = "\033[96;1m" # Blue aqua
 BB = "\033[34;1m" # Blue light
 YY = "\033[33;1m" # Yellow light
@@ -402,4 +403,4 @@ elif dcs1 == 4:
 # Opcion Incorrecta
 else:
 	print ("¡Escogiste una opcion inexistente!")
-	os.system("python3 a1.py")
+	os.system("python3 central.py")
