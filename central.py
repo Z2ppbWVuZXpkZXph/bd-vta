@@ -2,9 +2,11 @@
 import os, sys, time
 from openpyxl import load_workbook
 from openpyxl import Workbook
+from fpdf import FPDF
 import openpyxl 
 
-#COLORES                                                                                                                   GL = "\033[96;1m" # Blue aqua
+#COLORES                                                                                                                   
+GL = "\033[96;1m" # Blue aqua
 GL = "\033[96;1m" # Blue aqua
 BB = "\033[34;1m" # Blue light
 YY = "\033[33;1m" # Yellow light
@@ -124,7 +126,7 @@ tlt ="""██████╗░██████╗░  ░░░░░░
 print (YY+tlt)
 print (R + "\n-", WW + "Programa creado para almacenar información en bases de datos de VTA.", R + "\n-", WW + "Si no hay datos de algun requerimiento pon el numero 0, busca una manera de como\nsaber la información y completa los espacios en blanco.")
 
-print (BB + "¿Qué es lo que quieres hacer?", M + "\n\n1) Ingresar datos de una V8 nueva\n2) Ver o editar celdas\n3) Ver lista principal de V8\n4) Otros")
+print (BB + "¿Qué es lo que quieres hacer?", M + "\n\n1) Ingresar datos de una V8 nueva\n2) Ver o editar celdas\n3) Ver lista principal de V8\n4) Otros\n5) Salir")
 
 dcs1 = int(input(CC + "\nElige una opción: "+ WW))
 
@@ -337,7 +339,7 @@ elif dcs1 == 4:
 	hoja = cargar.active
 
 # OPCIONES ADICIONALES
-	print (BB + "Existen las siguientes opciones.", M + "\n1) Recopilación instantanea")
+	print (BB + "Existen las siguientes opciones.", M + "\n1) Recopilación instantanea\n2) Limpiar celdas")
 	rspsp = int(input(CC +"Escoge una opcion: "+ WW))
 
 # Subalternativa 1 - Recopilacion instantanea	
@@ -403,6 +405,111 @@ elif dcs1 == 4:
 		print ("Información recopilada de", reB)
 		print (B +"\nCódigo:", WW+str(reA), B+"\nNombres:", WW+reB, WW+reC, B+"\nApellidos:", WW+reD, reE, B+"\nGenero:", WW+reF, B+"\nEdad:", WW+str(reG), B+"\nAptitud Temporal:", WW+str(reH), B+"\nDNI:", WW+str(reI), B+"\nDigito de DNI:", WW+str(reJ), B+"\nRUC:", WW+str(reK), B+"\nFecha de Nacimiento:", WW+reL, B+"\nDistrito:", WW+reM, B+"\nDepartamento:", WW+reN, B+"\nEstatura", WW+str(reO), B+"\nUbigeo:", WW+ str(reP), B+"\nFecha de emisión:", WW+reQ, B+"\nEstado Civil:", WW+reR, B+"\nNúmero Telefónico:", WW + reS, B+"\nEstado - Seguro EsSalud:", WW+reT, B+"\nEstado - Seguro SIS:", WW+reU, B+"\nDomicilio:", WW+reV, B+"\nRazón de estar en la DB:", WW+reW)
 		print (YY +"\n=========================================\n"+ WW)
+
+# Opciones alternales
+		print ("¿Que es lo que deseas hacer?")
+		print (M + "\n1) Crear archivo PDF")
+
+		dcss = int(input(CC + "\nElige una opción: "+ WW))
+
+# Seleccion de la primer opcion
+		if dcss == 1:
+# Creacion de las variables, funciones y hojas
+			pdf = FPDF()
+			pdf.add_page()
+			sutil(YY +"Creando archivo...")
+			lento(GG +"Archivo creado con exito\n")
+			pdf.set_font("Arial",size=12)
+# Insercion de datos en PDF
+			pdf.cell(200,10,txt="BD-VTA Archivo recopilado",ln=1,align="C")
+			pdf.cell(200,10,txt="Informacion | Fase 1",ln=2,align="r")
+			pdf.cell(200,10,txt="Código de la victima: "+ reA,ln=3,align="r")
+			pdf.cell(200,10,txt="Nombres: "+ reB+" "+reC,ln=4,align="r")
+			pdf.cell(200,10,txt="Apellidos: "+ reD+" "+reE,ln=5,align="r")
+			pdf.cell(200,10,txt="Genero: "+ reF,ln=6,align="r")
+			pdf.cell(200,10,txt="Edad: "+ str(reG),ln=7,align= "r")
+			pdf.cell(200,10,txt="Informacion | Fase 2",ln=8,align="r")
+			pdf.cell(200,10,txt="Aptitud Temporal: "+ reH,ln=9,align="r")
+			pdf.cell(200,10,txt="DNI: "+ str(reI),ln=10,align="r")
+			pdf.cell(200,10,txt="Digito de DNI: "+ str(reJ),ln=11,align="r")
+			pdf.cell(200,10,txt="RUC: "+ str(reK),ln=12,align="r")
+			pdf.cell(200,10,txt="Fecha de Nacimiento: "+ reL,ln=13,align="r")
+			pdf.cell(200,10,txt="Distrito: "+ reM,ln=14,align="r")
+			pdf.cell(200,10,txt="Departamento: "+ reN,ln=15,align="r")
+			pdf.cell(200,10,txt="Informacion | Fase 3",ln=16,align="r")
+			pdf.cell(200,10,txt="Estatura: "+ str(reO),ln=17,align="r")
+			pdf.cell(200,10,txt="Ubigeo: "+ str(reP),ln=18,align="r")
+			pdf.cell(200,10,txt="Fecha de emisión: "+ reQ,ln=19,align="r")
+			pdf.cell(200,10,txt="Estado civil: "+ reR,ln=20,align="r")
+			pdf.cell(200,10,txt="Número telefónico: "+ reS,ln=21,align="r")
+			pdf.cell(200,10,txt="Estado - Seguro EsSalud: "+ reT,ln=22,align="r")
+			pdf.cell(200,10,txt="Estado - Seguro SIS: "+ reU,ln=23,align="r")
+			pdf.cell(200,10,txt="Razón de estar en la DB: "+ reW,ln=24,align="r")
+# Definicion de titulo			
+			arnom = (reB+" "+reC+" "+reD+" "+reE+".pdf")
+# Salvacion del archivo final
+			pdf.output(arnom)
+
+# Subalternativa 2 - limpiar celdas
+	elif rspsp == 2:
+		print ("Limpiando celdas")
+		fila9 = 1
+		while fila9 < 8:
+			fila9 = fila9 +1
+			cnto9 = (f"A{fila9}")
+			db19 = hoja[cnto9].value
+			while db19 == None:
+				vca = ""
+				fila10 = (f"B{fila9}")
+				fila11 = (f"C{fila9}")
+				fila12 = (f"B{fila9}")
+				fila13 = (f"C{fila9}")
+				fila14 = (f"D{fila9}")
+				fila15 = (f"E{fila9}")
+				fila16 = (f"F{fila9}")
+				fila17 = (f"G{fila9}")
+				fila18 = (f"H{fila9}")
+				fila19 = (f"I{fila9}")
+				fila20 = (f"J{fila9}")
+				fila21 = (f"K{fila9}")
+				fila22 = (f"L{fila9}")
+				fila23 = (f"M{fila9}")
+				fila24 = (f"N{fila9}")
+				fila25 = (f"O{fila9}")
+				fila26 = (f"P{fila9}")
+				fila27 = (f"Q{fila9}")	
+				fila28 = (f"R{fila9}")	
+				fila29 = (f"S{fila9}")
+				fila30 = (f"T{fila9}")
+				fila31 = (f"U{fila9}")
+				fila32 = (f"V{fila9}")
+				fila33 = (f"W{fila9}")
+				fila34 = (f"X{fila9}")
+				fila35 = (f"Y{fila9}")
+				fila36 = (f"Z{fila9}")
+
+				conteo = 10
+				while(conteo < 37):
+					conteo = conteo + 1
+					vlor = (f"fila[{conteo}].value")
+					print (vlor)
+					print (conteo)
+					vlor = None
+					break
+				else:
+					print ("A")
+		else:
+			print (GG+"Celdas limpias.\n")
+			cargar.save(fill)
+
+# Subalternativa incorrecta
+	else:
+		print ("Escogiste una alternativa incorrecta!")
+
+# Opción 5
+elif dcs1 == 5:
+	sutil("Saliendo del programa...")
+	os.system("clear;figlet VALLETTA")
 
 # Opcion Incorrecta
 else:
