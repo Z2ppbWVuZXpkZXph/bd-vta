@@ -6,7 +6,8 @@ from fpdf import FPDF
 import openpyxl 
 import fnmatch
 
-#COLORES                                                                                                                   GL = "\033[96;1m" # Blue aqua
+#COLORES
+GL = "\033[96;1m" # Blue aqua
 GL = "\033[96;1m" # Blue aqua
 BB = "\033[34;1m" # Blue light
 YY = "\033[33;1m" # Yellow light
